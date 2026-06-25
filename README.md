@@ -11,14 +11,14 @@ Demonstração: (1) o funcionamento normal de SSH, web e ping com o firewall des
 # Passo a Passo
 
 ## Atualizações básicas
-apt update
-apt upgrade
+`apt update` <br>
+`apt upgrade`
 
 ## Instalando o iptables
-apt install nginx openssh-server iptables -y
+`apt install nginx openssh-server iptables -y`
 
 ## Criando o script
-nano /usr/local/bin/firewall-if.sh
+`nano /usr/local/bin/firewall-if.sh`
 
 ````
 #!/bin/bash
@@ -72,10 +72,10 @@ esac
 ````
 
 ## Dando permissão para o script
-chmod +x /usr/local/bin/firewall-if.sh
+`chmod +x /usr/local/bin/firewall-if.sh`
 
 ## Criando serviço
-nano /etc/systemd/system/firewall-if.service
+`nano /etc/systemd/system/firewall-if.service`
 
 ````
 [Unit]
@@ -93,26 +93,26 @@ WantedBy=multi-user.target
 ````
 
 ## Reiniciando systemctl
-systemctl daemon-reload
+`systemctl daemon-reload`
 
-
+---
 
 # Fase de testes
 
 ## Fase 1, tudo desprotegido
-systemctl stop firewall-if
-(em outro terminal) ping 192.168.56.56
-(no navegador) http://192.168.56.56
+`systemctl stop firewall-if` <br>
+(em outro terminal) `ping 192.168.56.56` <br>
+(no navegador) [http://192.168.56.56](http://192.168.56.56)
 
 ## Fase 2, tudo bloqueado
-sudo nano /usr/local/bin/firewall-if.sh
-(comentar as liberações)
-systemctl restart firewall-if
+`sudo nano /usr/local/bin/firewall-if.sh` <br>
+(Ver as liberações)
+`systemctl restart firewall-if`
 
 ## Fase 3, SSH cai
-ssh alunos@192.168.56.56
+`ssh alunos@192.168.56.56`
 
 ## Fase 4, HTTP e ICMP cai
-(em outro terminal) ping 192.168.56.56
-(no navegador) http://192.168.56.56
+(em outro terminal) `ping 192.168.56.56` <br>
+(no navegador) [http://192.168.56.56](http://192.168.56.56)
 
